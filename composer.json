@@ -1,0 +1,15 @@
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": ["app/"],
+      "App\\Core\\":       "core/",
+      "App\\Controllers\\": "app/controllers/",
+      "App\\Models\\":     "app/models/",
+      "App\\Validators\\": "app/validators/"
+    }
+  },
+  "require": {
+    "phpoffice/phpspreadsheet": "^5.0",
+    "dompdf/dompdf": "^3.1"
+  }
+}

@@ -1,0 +1,720 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* ---------- Variables ---------- */
+:root {
+  --white: #FFFFFF;
+  --light-blue: #D6EFFB;
+  --medium-light-blue: #6AC8F1;
+  --medium-blue: #38B7EEFF;
+  --bright-blue: #039BE5;
+  --text: #1f2937;
+  --card: #ffffff;
+  --shadow: 0 12px 32px rgba(0, 0, 0, .12);
+}
+
+/* ---------- Base ---------- */
+body {
+  background-color: var(--light-blue);
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Layout principal ---------- */
+.perfil-main {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: transparent;
+}
+
+/* ---------- Encabezado ---------- */
+.perfil-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.perfil-header h1 {
+  font-size: 2rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.perfil-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ---------- Botones base ---------- */
+.btn {
+  font-family: var(--ff-sans, 'Roboto', sans-serif);
+  font-size: 1rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s, background-color .18s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Primary */
+.btn-save,
+.edit-btn {
+  background: var(--white);
+  color: var(--bright-blue);
+  border-color: var(--bright-blue);
+  font-weight: 800;
+}
+
+.btn-save:hover,
+.edit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  background: var(--bright-blue);
+  color: var(--white);
+}
+
+/* Secondary */
+.btn-cancel {
+  background: var(--white);
+  border-color: var(--bright-blue);
+  color: var(--bright-blue);
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.btn-cancel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  background: var(--bright-blue);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Icon button */
+.icon-btn {
+  padding: 0.5rem;
+  border-radius: 12px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  background: var(--card);
+  border: 2px solid rgba(3, 155, 229, 0.12);
+}
+
+/* Ajustes */
+.settings-btn {
+  background: var(--white);
+  border-color: var(--bright-blue);
+  color: var(--bright-blue);
+  font-weight: 800;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Formulario editar nombre ---------- */
+#formEditarNombre {
+  margin-top: 12px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+#formEditarNombre input[type="text"] {
+  flex-grow: 1;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border-color: var(--bright-blue);
+  font-size: 1rem;
+  transition: box-shadow .18s, border-color .18s;
+}
+
+#formEditarNombre input[type="text"]:focus {
+  outline: none;
+  border-color: var(--bright-blue);
+  box-shadow: 0 6px 18px rgba(3, 155, 229, 0.12);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ---------- Popup ajustes ---------- */
+.settings-container {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-popup {
+  font-family: 'Roboto';
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  min-width: 220px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 36px rgba(7, 22, 41, 0.14);
+  border: 2px solid var(--bright-blue);
+  transform-origin: top right;
+  opacity: 0;
+  transform: translateY(-6px) scale(.98);
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 1500;
+  pointer-events: none;
+  color: var(--bright-blue);
+  font-weight: 800;
+}
+
+.settings-popup.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Arrow */
+.settings-popup .settings-arrow {
+  position: absolute;
+  top: -7px;
+  right: 16px;
+  width: 14px;
+  height: 14px;
+  background: var(--card);
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.03);
+  border-left: 1px solid rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 2px;
+}
+
+/* Items */
+.settings-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+
+.settings-item:hover {
+  background: rgba(6, 115, 153, 0.05);
+  color: var(--bright-blue);
+}
+
+/* Popup botones */
+.popup-btn {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 0.98rem;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  color: var(--bright-blue);
+  font-weight: 600;
+
+}
+
+.popup-btn:hover {
+  background-color: var(--bright-blue);
+  color: var(--white);
+}
+
+.logout-btn {
+  color: var(--bright-blue);
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background-color: var(--bright-blue);
+  color: var(--white);
+}
+
+/* Select estilo */
+.selectTema {
+  padding: 6px 8px;
+  border: 2px solid var(--bright-blue);
+  border-radius: 20px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Formulario cambiar contraseña ---------- */
+#cambiarPasswordSection {
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+#cambiarPasswordSection h3 {
+  color: var(--medium-blue);
+  margin-bottom: 1.5rem;
+}
+
+#formCambiarPassword label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#formCambiarPassword input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#formCambiarPassword .btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/* ---------- Progreso ---------- */
+.perfil-progreso h2 {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.categorias-container {
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.categoria {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--card);
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+}
+
+.categoria-icon {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+}
+
+.categoria-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.categoria-nombre {
+  flex: 2;
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--text);
+}
+
+/* Barra progreso */
+.barra-progreso {
+  flex: 3;
+  background: #e5e7eb;
+  border-radius: 50px;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.barra {
+  background: var(--bright-blue);
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  background-image: linear-gradient(45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent);
+  background-size: 40px 40px;
+  animation: animated-stripes 1.5s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.barra::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+}
+
+.porcentaje {
+  min-width: 40px;
+  text-align: right;
+  font-weight: bold;
+}
+
+/* Fondo del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  /* fondo oscuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Caja del modal */
+.modal-content {
+  background: var(--color-fondo, #fff);
+  color: var(--color-texto, #000);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: aparecer 0.3s ease-out;
+}
+
+/* Animación suave */
+@keyframes aparecer {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Botón cerrar */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Inputs dentro del modal */
+.modal-content input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.4rem 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Botones de acción */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+
+/* ---------- Animaciones ---------- */
+@keyframes animated-stripes {
+  from {
+    background-position: 40px 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .perfil-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .perfil-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  #formEditarNombre {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #formEditarNombre input[type="text"] {
+    width: 100%;
+  }
+
+  .settings-popup {
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .settings-popup {
+    right: 8px;
+    left: 8px;
+    top: calc(100% + 10px);
+  }
+
+  .perfil-actions {
+    gap: 0.5rem;
+  }
+
+  .icon-btn .label {
+    display: none;
+  }
+}
+
+/* 🌙 Tema oscuro para perfil */
+html.oscuro {
+  --white: #121212;
+  --light-blue-1: #1E1E2E;
+  --light-blue-2: #2D2D44;
+  --medium-blue: #3A82F7;
+  --vivid-blue: #1E88E5;
+  --dark-blue: #1565C0;
+  --black: #E0E0E0;
+  --gray-light: #2A2A3A;
+  --gray-border: #444;
+  --gray-medium: #AAAAAA;
+  --success-green: #4CAF50;
+  --error-red: #F44336;
+
+  --card: var(--light-blue-2);
+  --text: var(--black);
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Fondo general */
+html.oscuro body {
+  background-color: var(--light-blue-1);
+  color: var(--black);
+}
+
+/* ---------- Encabezado ---------- */
+html.oscuro .perfil-header h1 {
+  color: var(--black);
+}
+
+/* ---------- Botones ---------- */
+html.oscuro .btn-save,
+html.oscuro .edit-btn,
+html.oscuro .btn-cancel,
+html.oscuro .settings-btn {
+  background: var(--light-blue-1);
+  color: var(--vivid-blue);
+  border-color: var(--vivid-blue);
+}
+
+html.oscuro .btn-save:hover,
+html.oscuro .edit-btn:hover,
+html.oscuro .btn-cancel:hover,
+html.oscuro .settings-btn:hover {
+  background: var(--vivid-blue);
+  color: var(--white);
+}
+
+/* Icon button */
+html.oscuro .icon-btn {
+  background: var(--light-blue-2);
+  border: 2px solid rgba(30, 136, 229, 0.3);
+}
+
+/* ---------- Formulario editar nombre ---------- */
+html.oscuro #formEditarNombre input[type="text"] {
+  background: var(--light-blue-2);
+  border: 1px solid var(--vivid-blue);
+  color: var(--black);
+}
+
+/* ---------- Popup ajustes ---------- */
+html.oscuro .settings-popup {
+  background: var(--light-blue-2);
+  border: 2px solid var(--vivid-blue);
+  color: var(--black);
+}
+
+html.oscuro .settings-popup .settings-arrow {
+  background: var(--light-blue-2);
+  border-left: 1px solid var(--gray-border);
+  border-top: 1px solid var(--gray-border);
+}
+
+html.oscuro .settings-item:hover {
+  background: var(--light-blue-1);
+  color: var(--vivid-blue);
+}
+
+html.oscuro .popup-btn {
+  color: var(--vivid-blue);
+}
+
+html.oscuro .popup-btn:hover,
+html.oscuro .logout-btn:hover {
+  background-color: var(--vivid-blue);
+  color: var(--white);
+}
+
+/* ---------- Cambiar contraseña ---------- */
+html.oscuro #cambiarPasswordSection {
+  background: var(--light-blue-2);
+  box-shadow: var(--shadow);
+}
+
+html.oscuro #cambiarPasswordSection h3 {
+  color: var(--medium-blue);
+}
+
+html.oscuro #formCambiarPassword input[type="password"] {
+  background: var(--light-blue-1);
+  border: 1px solid var(--gray-border);
+  color: var(--black);
+}
+
+/* ---------- Progreso ---------- */
+html.oscuro .perfil-progreso h2 {
+  color: var(--black);
+}
+
+html.oscuro .categoria {
+  background: var(--light-blue-2);
+  box-shadow: var(--shadow);
+}
+
+html.oscuro .categoria-nombre {
+  color: var(--black);
+}
+
+html.oscuro .barra-progreso {
+  background: var(--gray-light);
+}
+
+html.oscuro .barra {
+  background: var(--vivid-blue);
+}
+
+/* ---------- Modal ---------- */
+html.oscuro .modal-content {
+  background: var(--light-blue-2);
+  color: var(--black);
+}
+
+html.oscuro .modal-close {
+  color: var(--black);
+}
+
+html.oscuro .modal-content input {
+  background: var(--light-blue-1);
+  border: 1px solid var(--gray-border);
+  color: var(--black);
+}
+
+html.oscuro .modal-actions .btn {
+  background: var(--light-blue-1);
+  border-color: var(--vivid-blue);
+  color: var(--vivid-blue);
+}
+
+html.oscuro .modal-actions .btn:hover {
+  background: var(--vivid-blue);
+  color: var(--white);
+}
+
+
+/* Toggle Switch */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--bright-blue);
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 34px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background: var(--bright-blue);
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+

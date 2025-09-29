@@ -1,0 +1,240 @@
+/* ... (Estilos de variables y configuración global que ya tenías) ... */
+
+:root {
+    /* Paleta de colores (Tema claro) */
+    --clr-white: #FFFFFF;
+    --clr-light-blue-1: #F0F8FF;
+    --clr-light-blue-2: #6AC8F1;
+    --clr-medium-blue: #38B7EE;
+    --clr-vivid-blue: #039BE5;
+    --clr-dark-blue: #0277BD;
+    --clr-black: #212529;
+    --clr-gray-light: #F5F5F5;
+    --clr-gray-border: #E0E0E0;
+
+    /* Tipografía y espaciados */
+    --fs-base: 18px;
+    --ff-sans: 'Roboto', sans-serif;
+    --transition-fast: 0.3s ease-in-out;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.15);
+    --nav-height: 80px;
+}
+
+/* Tema oscuro */
+html.dark {
+    --clr-white: #121212;
+    --clr-light-blue-1: #1E1E2E;
+    --clr-black: #E0E0E0;
+    --clr-gray-light: #2A2A3A;
+    --clr-gray-border: #444444;
+    --clr-dark-blue: #6AC8F1; /* Hacemos el azul oscuro más brillante en modo oscuro */
+    
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.6);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: var(--fs-base); }
+body {
+    font-family: var(--ff-sans);
+    color: var(--clr-black);
+    background-color: var(--clr-light-blue-1);
+    line-height: 1.7;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* LAYOUT BÁSICO */
+.container {
+    max-width: 1140px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* 3. BARRA DE NAVEGACIÓN */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
+    height: var(--nav-height);
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-md);
+    transition: background-color var(--transition-fast);
+}
+
+html.dark .navbar {
+    background-color: rgba(30, 30, 46, 0.8);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--clr-dark-blue);
+    text-decoration: none;
+    font-size: 1.25rem;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--clr-black);
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: var(--clr-vivid-blue);
+}
+
+.btn-primary-custom {
+    background-color: var(--clr-vivid-blue);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary-custom:hover {
+    background-color: var(--clr-dark-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+
+/* Menú de hamburguesa */
+.nav-toggle {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 22px;
+    position: relative;
+    z-index: 1001;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--clr-dark-blue);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+}
+
+.nav-toggle span:nth-child(1) { top: 0; }
+.nav-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.nav-toggle span:nth-child(3) { bottom: 0; }
+
+/* Animación de hamburguesa a "X" */
+.nav-toggle.is-active span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+.nav-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle.is-active span:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+/* GRID */
+.grid-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.grid-item:first-child {
+    flex: 1 1 30%;
+}
+
+.grid-item:last-child {
+    flex: 1 1 70%; 
+}
+
+
+/* ESTILOS DE SECCIONES Y CONTENIDO */
+main {
+    padding-top: var(--nav-height); 
+}
+
+
+
+/* RESPONSIVIDAD */
+@media (max-width: 992px) {
+    .grid-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--clr-white);
+        padding: 1.5rem;
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        box-shadow: var(--shadow-md);
+    }
+    
+    html.dark .navbar-menu {
+      background-color: var(--clr-gray-light);
+    }
+
+    .navbar-menu.is-active {
+        transform: translateY(0);
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}

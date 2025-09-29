@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  Options -MultiViews
+  RewriteEngine On
+  RewriteBase /tht-php/public/
+
+  # Si el recurso solicitado ya existe como archivo o carpeta, sírvelo
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # En caso contrario, envía la petición a index.php
+  RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+
